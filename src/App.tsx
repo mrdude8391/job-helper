@@ -6,26 +6,17 @@ import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
-  const [status, setStatus] = useState(false);
-
-  // const checkAPI = () => {
-  //   fetch("http://localhost:5225/status")
-  //     .then((response) => {
-  //       console.log(response);
-  //       return response;
-  //     })
-  //     .then((data) => {
-  //       console.log(data);
-  //       setStatus(data.status);
-  //     });
-  // };
+  const [status, setStatus] = useState({
+    message: "No connection",
+    status: false,
+  });
 
   const checkAPI = async () => {
-    const response = await fetch("http://localhost:5225/status");
+    const response = await fetch("http://localhost:5062/status");
     console.log(response);
     const data = await response.json();
     console.log(data);
-    setStatus(data.status);
+    setStatus(data);
   };
 
   return (
@@ -43,7 +34,14 @@ function App() {
           </p>
         </div>
         <div>
-          <div>Status: {status && <p>yes</p>}</div>
+          <div>
+            Status:{" "}
+            <span>
+              <p>
+                {status.message} {status.status && <>Success</>}
+              </p>{" "}
+            </span>
+          </div>
           <button type="button" className="counter" onClick={() => checkAPI()}>
             Refresh Status
           </button>
