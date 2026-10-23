@@ -3,6 +3,7 @@ import heroImg from "../assets/hero.png";
 import reactLogo from "../assets/react.svg";
 import viteLogo from "../assets/vite.svg";
 import "../styles/App.css";
+import { logger } from "../lib/logger";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -13,9 +14,9 @@ function App() {
 
   const checkAPI = async () => {
     const response = await fetch("http://localhost:5062/status");
-    console.log(response);
+    logger.info("Fetch API Response", { item: response });
     const data = await response.json();
-    console.log(data);
+    logger.info("Response Data", { item: data });
     setStatus(data);
   };
 
