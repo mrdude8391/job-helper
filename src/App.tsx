@@ -1,11 +1,32 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState } from "react";
+import heroImg from "./assets/hero.png";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "./assets/vite.svg";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [status, setStatus] = useState(false);
+
+  // const checkAPI = () => {
+  //   fetch("http://localhost:5225/status")
+  //     .then((response) => {
+  //       console.log(response);
+  //       return response;
+  //     })
+  //     .then((data) => {
+  //       console.log(data);
+  //       setStatus(data.status);
+  //     });
+  // };
+
+  const checkAPI = async () => {
+    const response = await fetch("http://localhost:5225/status");
+    console.log(response);
+    const data = await response.json();
+    console.log(data);
+    setStatus(data.status);
+  };
 
   return (
     <>
@@ -20,6 +41,12 @@ function App() {
           <p>
             Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
           </p>
+        </div>
+        <div>
+          <div>Status: {status && <p>yes</p>}</div>
+          <button type="button" className="counter" onClick={() => checkAPI()}>
+            Refresh Status
+          </button>
         </div>
         <button
           type="button"
@@ -116,7 +143,7 @@ function App() {
       <div className="ticks"></div>
       <section id="spacer"></section>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
