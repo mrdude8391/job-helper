@@ -22,3 +22,12 @@ The front end of an app to help with job applications and what not.
 2. application status
 3. resume gaps/matches
 4. online interviews
+
+### Work Timeline
+
+- [x] Define project architecture
+- [ ] Configure API client and ENV variables: HTTP communication
+- [ ] Setup React Router: Page navigation and layouts
+- [ ] Setup TanStack Query: Server state and caching
+- [ ] Create Auth feature: Forms, mutations, auth flow
+- [ ] Job apps feature: CRUD operations
